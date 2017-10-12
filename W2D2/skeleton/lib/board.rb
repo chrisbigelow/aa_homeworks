@@ -19,33 +19,25 @@ class Board
   end
 
   def make_move(start_pos, current_player_name)
-    stones = @cups[start_pos]
-    @cups[start_pos] = []
-
-    index = start_pos
-    until stones.empty?
-      index += 1
-      index = 0 if index > 13
-      if index == 6
-        @cups[6] << stones.pop if current_player_name == @player_one
-      elsif index == 13
-        @cups[13] << stones.pop if current_player_name == @player_two
-      else
-        @cups[index] << stones.pop
-      end
+    if current_player_name == @player_one
+      banned = [6..13]
+    else
+      banned = [0..5]
     end
-    render
-    next_turn(index)
+      number_pieces = @cups[start_pos].length
+      @cups[start_pos] = []
+      counter = start_pos + 1
+      until number_pieces <= 0
+        next if banned.include?(counter)
+        @cups[counter] += [:stone]
+        number_pieces -= 1
+        counter += 1
+        counter = 0 if counter > 13
+      end
+
   end
 
   def next_turn(ending_cup_idx)
-    if ending_cup_idx == 6 || ending_cup_idx == 13
-      :prompt
-    elsif @cups[ending_cup_idx].count == 1
-      :switch
-    else
-      ending_cup_idx
-    end
 
   end
 
