@@ -1,6 +1,10 @@
 /* PHASE 2: Navigation */
 
 .header-logo {
+  float: left;
+  font-weight: bold;
+  border-right: 1px solid;
+  border-color: #ccc;
 
 }
 
@@ -9,13 +13,18 @@
 }
 
 .header-list {
+  float: right;
 
 }
 
 .header-list > li {
+  float: left;
+  border-left: 1px solid;
+  border-color: #ccc;
 
 }
 
 .header-list > li:hover {
+  background-color: black;
 
 }
